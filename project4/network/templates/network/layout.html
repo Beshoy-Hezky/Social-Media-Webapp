@@ -8,8 +8,8 @@
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="app-theme" >
+        <nav class="navbar navbar-expand-lg navbar-light" >
             <a class="navbar-brand" href="#">Network</a>
           
             <div>
@@ -40,8 +40,8 @@
               </ul>
             </div>
           </nav>
-        
-        <div class="body">
+        </div>
+        <div class="body" style="margin: 25px;">
             {% block body %}
             {% endblock %}
         </div>
