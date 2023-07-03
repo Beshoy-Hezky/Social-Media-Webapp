@@ -1,10 +1,10 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <h1>All Posts</h1>
+    <h1 class="font-weight">All Posts</h1>
     <div style="margin: 35px;">
     {% if user.is_authenticated %}
-        <h4> New Post</h4>
+        <h4 class="font-weight"> New Post</h4>
         <form action="{% url 'new_post' %}" method="post">
             {% csrf_token %}
             <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="4"></textarea>

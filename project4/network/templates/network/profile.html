@@ -1,7 +1,22 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <h1>{{ username }}</h1>
+    <div class="centered">
+    <h1 class="font-weight">{{ username }}</h1>
+    </div>
+    <div class="follower-following">
+  <div class="follower-count">
+    <span class="count">0</span>
+    <span class="label">Followers</span>
+  </div>
+  <div class="following-count">
+    <span class="count">0</span>
+    <span class="label">Following</span>
+  </div>
+</div>
+
+
+
     <div style="margin: 35px;">
         {% for post in posts %}
         <div class="card">
