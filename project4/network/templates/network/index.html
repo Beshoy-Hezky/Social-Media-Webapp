@@ -14,7 +14,7 @@
         {% for post in posts %}
         <div class="card">
             <div class="card-content">
-            <a href="" class="theme-text"><b>{{post.author}}</b></a><hr>
+            <a href="{% url 'visit_profile' id=post.author.id%}" class="theme-text"><b>{{post.author}}</b></a><hr>
                 <p>{{ post.content }}</p>
                 <p class="date">{{ post.timestamp }}</p>
             </div>
