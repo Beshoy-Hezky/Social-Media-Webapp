@@ -8,7 +8,11 @@ from .models import User, Post
 
 
 def index(request):
-    return render(request, "network/index.html")
+    getposts = Post.objects.all()
+    ordered_posts = getposts.order_by("id").reverse()
+    return render(request, "network/index.html", {
+        "posts": ordered_posts
+    })
 
 def new_post(request):
     if request.method == "POST":
@@ -16,6 +20,7 @@ def new_post(request):
         thepost = Post(content=content, author=request.user)
         thepost.save()
         return HttpResponseRedirect(reverse("index"))
+
 
 def login_view(request):
     if request.method == "POST":
