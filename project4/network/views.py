@@ -14,6 +14,17 @@ def index(request):
         "posts": ordered_posts
     })
 
+
+def visit_profile(request, id):
+    user = User.objects.get(id=id)
+    getposts = Post.objects.filter(author=user)
+    ordered_posts = getposts.order_by("id").reverse()
+    return render(request, "network/profile.html", {
+        "posts": ordered_posts,
+        "username": user.username
+    })
+
+
 def new_post(request):
     if request.method == "POST":
         content = request.POST["content"]
