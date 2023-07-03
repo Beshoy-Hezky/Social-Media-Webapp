@@ -3,11 +3,25 @@
 {% block body %}
     <h1>All Posts</h1>
     <div style="margin: 35px;">
+    {% if user.is_authenticated %}
         <h4> New Post</h4>
         <form action="{% url 'new_post' %}" method="post">
             {% csrf_token %}
             <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="4"></textarea>
              <button class="button2" type="submit">Post</button>
         </form>
+    {% endif %}
+        {% for post in posts %}
+        <div class="card">
+            <div class="card-content">
+            <a href="" class="theme-text"><b>{{post.author}}</b></a><hr>
+                <p>{{ post.content }}</p>
+                <p class="date">{{ post.timestamp }}</p>
+            </div>
+        </div>
+         {% endfor %}
     </div>
+
+
+
 {% endblock %}
