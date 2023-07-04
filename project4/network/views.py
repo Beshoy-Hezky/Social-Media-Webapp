@@ -28,8 +28,9 @@ def visit_profile(request, id):
 def new_post(request):
     if request.method == "POST":
         content = request.POST["content"]
-        thepost = Post(content=content, author=request.user)
-        thepost.save()
+        if len(content) != 0:
+            thepost = Post(content=content, author=request.user)
+            thepost.save()
         return HttpResponseRedirect(reverse("index"))
 
 
