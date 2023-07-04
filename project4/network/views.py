@@ -3,12 +3,13 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-
+from django.db.models import QuerySet
 from .models import User, Post
 
 
 def index(request):
     getposts = Post.objects.all()
+    # Reverse order by reverse id
     ordered_posts = getposts.order_by("id").reverse()
     return render(request, "network/index.html", {
         "posts": ordered_posts
@@ -21,7 +22,7 @@ def visit_profile(request, id):
     ordered_posts = getposts.order_by("id").reverse()
     return render(request, "network/profile.html", {
         "posts": ordered_posts,
-        "username": user.username
+        "user": user
     })
 
 
@@ -32,6 +33,18 @@ def new_post(request):
             thepost = Post(content=content, author=request.user)
             thepost.save()
         return HttpResponseRedirect(reverse("index"))
+
+
+def following_posts(request):
+    user = request.user
+    # Filter the posts
+    getposts = Post.objects.filter(author__in=user.following.all())
+    # Reverse order by reverse id
+    ordered_posts = getposts.order_by("id").reverse()
+    return render(request, "network/followingposts.html", {
+        "posts": ordered_posts,
+        "user": user
+    })
 
 
 def login_view(request):
