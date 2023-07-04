@@ -3,7 +3,6 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.db.models import QuerySet
 from .models import User, Post
 
 
@@ -22,8 +21,24 @@ def visit_profile(request, id):
     ordered_posts = getposts.order_by("id").reverse()
     return render(request, "network/profile.html", {
         "posts": ordered_posts,
-        "user": user
+        "user_of_profile": user
     })
+
+
+def follow_unfollow(request):
+    if request.method == "POST":
+        # User who made the request
+        requestor = User.objects.get(id=request.user.id)
+        # User who is going to get followed or unfollowed
+        profile_id = request.POST["id"]
+        profile = User.objects.get(id=profile_id)
+        # To check if the request is to follow or unfollow
+        action = request.POST["button"]
+        if action == "follow":
+            requestor.following.add(profile)
+        elif action == "unfollow":
+            requestor.following.remove(profile)
+        return HttpResponseRedirect(reverse("visit_profile", args=[profile_id]))
 
 
 def new_post(request):

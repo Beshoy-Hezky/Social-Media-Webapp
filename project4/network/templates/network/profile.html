@@ -1,16 +1,31 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+    {% if request.user != user_of_profile and user.is_authenticated %}
+        {% if user_of_profile in request.user.following.all %}
+            <form action="{% url 'follow_unfollow' %}" method="post">
+                {% csrf_token %}
+                 <input type="hidden" name="id" value="{{ user_of_profile.id }}">
+                <button class="btn btn-info" name="button" value="unfollow" type="submit">Unfollow</button>
+            </form>
+            {% else %}
+             <form action="{% url 'follow_unfollow' %}" method="post">
+             {% csrf_token %}
+                <input type="hidden" name="id" value="{{ user_of_profile.id }}">
+                <button class="btn btn-info" name="button" value="follow" type="submit">Follow</button>
+             </form>
+        {% endif %}
+    {% endif %}
     <div class="centered">
-    <h1 class="font-weight">{{ user.username }}</h1>
+    <h1 class="font-weight">{{ user_of_profile.username }}</h1>
     </div>
     <div class="follower-following">
   <div class="follower-count">
-    <span class="count">{{ user.followers.all.count }}</span>
+    <span class="count">{{ user_of_profile.followers.all.count }}</span>
     <span class="label">Followers</span>
   </div>
   <div class="following-count">
-    <span class="count">{{ user.following.count }}</span>
+    <span class="count">{{ user_of_profile.following.count }}</span>
     <span class="label">Following</span>
   </div>
 </div>
