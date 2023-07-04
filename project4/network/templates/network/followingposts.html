@@ -1,0 +1,19 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1 class="font-weight">{{ user.username }}'s following</h1>
+    <div style="margin: 35px;">
+        {% for post in posts %}
+        <div class="card">
+            <div class="card-content">
+            <a href="{% url 'visit_profile' id=post.author.id%}" class="theme-text"><b>{{post.author}}</b></a><hr>
+                <p>{{ post.content }}</p>
+                <p class="date">{{ post.timestamp }}</p>
+            </div>
+        </div>
+         {% endfor %}
+    </div>
+
+
+
+{% endblock %}

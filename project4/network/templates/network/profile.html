@@ -2,15 +2,15 @@
 
 {% block body %}
     <div class="centered">
-    <h1 class="font-weight">{{ username }}</h1>
+    <h1 class="font-weight">{{ user.username }}</h1>
     </div>
     <div class="follower-following">
   <div class="follower-count">
-    <span class="count">0</span>
+    <span class="count">{{ user.followers.all.count }}</span>
     <span class="label">Followers</span>
   </div>
   <div class="following-count">
-    <span class="count">0</span>
+    <span class="count">{{ user.following.count }}</span>
     <span class="label">Following</span>
   </div>
 </div>
