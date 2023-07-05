@@ -4,14 +4,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import User, Post
+from django.core.paginator import Paginator
 
 
 def index(request):
     getposts = Post.objects.all()
     # Reverse order by reverse id
     ordered_posts = getposts.order_by("id").reverse()
+    # To apply pagination
+    paginator = Paginator(ordered_posts, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(request, "network/index.html", {
-        "posts": ordered_posts
+        "posts": page_obj
     })
 
 
@@ -56,9 +61,13 @@ def following_posts(request):
     getposts = Post.objects.filter(author__in=user.following.all())
     # Reverse order by reverse id
     ordered_posts = getposts.order_by("id").reverse()
+    # To apply pagination
+    paginator = Paginator(ordered_posts, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(request, "network/followingposts.html", {
-        "posts": ordered_posts,
-        "user": user
+        "posts": page_obj,
+        "user_of_profile": user
     })
 
 
