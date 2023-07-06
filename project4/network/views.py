@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from .models import User, Post
 from django.core.paginator import Paginator
-
+import json
 
 def index(request):
     getposts = Post.objects.all()
@@ -69,6 +69,15 @@ def following_posts(request):
         "posts": page_obj,
         "user_of_profile": user
     })
+
+
+def edit(request, id):
+    if request.method == "POST":
+        info = json.loads(request.body)
+        post = Post.objects.get(id=id)
+        post.content = info["new_content"]
+        post.save()
+    return None
 
 
 def login_view(request):
