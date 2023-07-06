@@ -1,5 +1,5 @@
 {% extends "network/layout.html" %}
-
+{% load static %}
 {% block body %}
     <h1 class="font-weight">All Posts</h1>
     <div style="margin: 35px;">
@@ -15,7 +15,23 @@
         <div class="card">
             <div class="card-content">
             <a href="{% url 'visit_profile' id=post.author.id%}" class="theme-text"><b>{{post.author}}</b></a><hr>
-                <p>{{ post.content }}</p>
+
+                <div class="editable">
+                    <form class="edit-form">
+                        <textarea class="form-control" id="forminfo-{{post.id}}" name="content" rows="4">{{post.content}}</textarea>
+
+                    </form>
+                    <button class="btn btn-outline-warning" id="submit-{{post.id}}">Submit</button>
+                </div>
+                <div class="content">
+                    <div style="display: none;" id="id">{{post.id}}</div>
+                <p id="paragraph-{{post.id}}">{{ post.content }}</p>
+                    {% if user.is_authenticated %}
+                    {% if user == post.author %}
+                    <button type="button" class="btn btn-outline-warning" id="edit">Edit</button>
+                    {% endif %}
+                {% endif %}
+                </div>
                 <p class="date">{{ post.timestamp }}</p>
             </div>
         </div>
