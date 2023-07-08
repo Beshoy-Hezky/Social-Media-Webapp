@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import User, Post
 from django.core.paginator import Paginator
 import json
+from django.http import JsonResponse
 
 def index(request):
     getposts = Post.objects.all()
@@ -77,7 +78,29 @@ def edit(request, id):
         post = Post.objects.get(id=id)
         post.content = info["new_content"]
         post.save()
-    return None
+    return JsonResponse({"message": "successful EDIT"})
+
+
+def add_like(request, id):
+    if request.method == "POST":
+        info = json.loads(request.body)
+        post = Post.objects.get(id=id)
+        liker_id = info["person_id"]
+        liker = User.objects.get(id=liker_id)
+        post.user_liked.add(liker)
+        post.save()
+    return JsonResponse({"message": "successful LIKE"})
+
+
+def remove_like(request, id):
+    if request.method == "POST":
+        info = json.loads(request.body)
+        post = Post.objects.get(id=id)
+        hater_id = info["person_id"]
+        hater = User.objects.get(id=hater_id)
+        post.user_liked.remove(hater)
+        post.save()
+    return JsonResponse({"message": "successful UNLIKE"})
 
 
 def login_view(request):
