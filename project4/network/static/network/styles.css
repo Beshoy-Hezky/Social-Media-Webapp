@@ -97,9 +97,6 @@
   max-width: 650px;
   height: 265px;
   box-shadow: rgba(127,124,255, 0.6) 0px 0px 0px 3px;
-  /*height: 265px;
-  background: rgba(238, 237, 237, 0.56);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;*/
 }
 
 .card-content{
