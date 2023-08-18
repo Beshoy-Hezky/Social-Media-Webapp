@@ -4,20 +4,4 @@
     <h1 class="font-weight">{{ user_of_profile.username }}'s following</h1>
     {% include 'network/cards_template.html' %}
 
-    <footer>
-    <div class="button-container">
-    <span>
-        {% if posts.has_previous %}
-        <a href="?page={{ posts.previous_page_number }}"><button class="button2">Previous</button></a>
-        {% endif %}
-    </span>
-
-    <span>
-        {% if posts.has_next %}
-        <a href="?page={{ posts.next_page_number }}"><button class="button2">Next</button></a>
-        {% endif %}
-    </span>
-</div>
-</footer>
-
 {% endblock %}
