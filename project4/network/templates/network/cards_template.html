@@ -47,6 +47,8 @@
         </div>
          {% endfor %}
     </div>
+
+  <div style="display: flex; justify-content: space-between;">
     <span>
         {% if posts.has_previous %}
         <a href="?page={{ posts.previous_page_number }}"><button class="button2">Previous</button></a>
@@ -58,6 +60,8 @@
         <a href="?page={{ posts.next_page_number }}"><button class="button2">Next</button></a>
         {% endif %}
     </span>
+</div>
+
 
 </body>
 </html>
