@@ -1,7 +1,7 @@
 # Social-Media-Webapp
 Designed a Twitter-like social network website for making posts and following users.
 
-[Click here to see video]([https://youtu.be/bwa3893hbU0?si=7EWzEMn36iyCwZGS](https://youtu.be/a2yUOUAggPQ?si=G7e8p9XhBfaSaJP-))
+[Click here to see video](https://youtu.be/a2yUOUAggPQ?si=eVzVH2iqtEtIe8ix)
 
 [Click here to see webapp](http://beshoyhezky2.pythonanywhere.com/)
 
